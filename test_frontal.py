@@ -102,10 +102,7 @@ if __name__ == '__main__':
     if opt.names is None:
         model = TestModel(opt)
         model.eval()
-        model = torch.nn.DataParallel(model.cuda(),
-                                      device_ids=opt.gpu_ids,
-                                      output_device=opt.gpu_ids[-1],
-                                      )
+        model = torch.nn.DataParallel(model.cuda())
         models = [model]
         names = [opt.name]
         save_path = create_path(create_path(opt.save_path, opt.name), opt.dataset)
@@ -121,10 +118,7 @@ if __name__ == '__main__':
             opt.name = name
             model = TestModel(opt)
             model.eval()
-            model = torch.nn.DataParallel(model.cuda(),
-                                          device_ids=opt.gpu_ids,
-                                          output_device=opt.gpu_ids[-1],
-                                          )
+            model = torch.nn.DataParallel(model.cuda())
             models.append(model)
             names.append(name)
             save_path = create_path(create_path(opt.save_path, opt.name), opt.dataset)
